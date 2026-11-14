@@ -18,12 +18,11 @@ function Logo() {
 }
 
 export default async function Home() {
-  const { enableAuth, reloadSeconds } = getConfig();
+  const { enableAuth } = getConfig();
   const theme = getTheme((await cookies()).get("books-theme")?.value);
 
   return (
     <>
-      {reloadSeconds > 0 && <meta httpEquiv="refresh" content={String(reloadSeconds)} />}
       <header className="site-header">
         <div className="header-inner">
           <Logo />
