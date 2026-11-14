@@ -1,0 +1,16 @@
+services:
+  books:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      ENABLE_AUTH: ${ENABLE_AUTH:-false}
+      RELOAD_SECONDS: ${RELOAD_SECONDS:-5}
+      AWS_REGION: ${AWS_REGION:-}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
