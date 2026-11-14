@@ -2,7 +2,7 @@
 
 A server-rendered, single-page reading list for people building technology. Book covers are served by [Open Library](https://openlibrary.org/).
 
-Covers are fetched through the server and cached for 24 hours, so browsers can reuse them during automatic reloads. The server-side cache is local to each running instance.
+Covers are fetched through the server and cached for 24 hours, so browsers can reuse them on subsequent visits. The server-side cache is local to each running instance.
 
 ## Local development
 
@@ -41,9 +41,8 @@ These settings are read on the server at request time, so they can be changed wh
 | Variable | Default | Description |
 | --- | --- | --- |
 | `ENABLE_AUTH` | `false` | Set to `true` to show a **non-functional preview** login form. This does not authenticate users or protect the application. |
-| `RELOAD_SECONDS` | `5` | Page reload interval in whole seconds. Set to `0` to disable. Invalid values use the default. |
 
-Compose reads these variables from your shell or a local `.env` file. For example, `ENABLE_AUTH=true RELOAD_SECONDS=0 docker compose up --build` shows the login preview without refreshing it.
+Compose reads this variable from your shell or a local `.env` file. For example, `ENABLE_AUTH=true docker compose up --build` shows the login preview.
 
 The theme chooser offers Light and Dark. The selection is stored in a cookie so the server renders the chosen theme on reload. To add another theme, add it to the `themes` list in `lib/themes.js` and define its CSS variables under a matching `data-theme` selector in `app/globals.css`.
 
