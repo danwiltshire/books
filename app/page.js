@@ -1,6 +1,5 @@
 import { books } from "../lib/books.js";
 import { getConfig } from "../lib/config.js";
-import { getRegion } from "../lib/region.js";
 import LoginPreview from "./login-preview.js";
 import ThemeChooser from "./theme-chooser.js";
 
@@ -16,9 +15,8 @@ function Logo() {
   );
 }
 
-export default async function Home() {
+export default function Home() {
   const { enableAuth, reloadSeconds } = getConfig();
-  const region = await getRegion();
 
   return (
     <>
@@ -54,11 +52,6 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="footer-inner">
-          <div><span className="status-dot" /> <span className="footer-label">REGION</span> <strong>{region || "Not available"}</strong></div>
-        </div>
-      </footer>
       {enableAuth && <LoginPreview />}
     </>
   );
