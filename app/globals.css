@@ -52,7 +52,7 @@ h1, h2, h3, p { margin: 0; }
 .cover-corner { position: absolute; bottom: 12px; right: 13px; color: #a1aa9c; font-size: 13px; }
 .book-info { padding-top: 17px; }
 .book-category { color: #83997a; font-size: 8px; letter-spacing: 1px; }
-.book-info h3 { font-family: "DM Serif Display", Georgia, serif; font-size: 18px; line-height: 1.2; font-weight: 400; margin: 8px 0 6px; }
+.book-info h3 { font-family: "DM Serif Display", Georgia, serif; font-size: 20px; line-height: 1.2; font-weight: 400; margin: 8px 0 6px; }
 .book-author { color: #8d9288; font-size: 11px; line-height: 1.5; }
 .auth-overlay { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 24px; background: #1b251dcc; overflow: auto; }
 .auth-card { width: min(100%, 420px); padding: 40px; background: var(--background); box-shadow: 0 20px 70px #0003; }
