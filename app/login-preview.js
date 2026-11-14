@@ -1,10 +1,15 @@
 "use client";
 
-export default function LoginPreview() {
+import ThemeChooser from "./theme-chooser.js";
+
+export default function LoginPreview({ initialTheme }) {
   return (
     <div className="auth-overlay">
       <section className="auth-card" aria-labelledby="login-title">
-        <div className="auth-icon" aria-hidden="true">✳</div>
+        <div className="auth-top">
+          <div className="auth-icon" aria-hidden="true">✳</div>
+          <ThemeChooser initialTheme={initialTheme} />
+        </div>
         <p className="eyebrow">WELCOME TO BOOKS</p>
         <h2 id="login-title">Good to see you.</h2>
         <p>Sign in to explore your reading list.</p>

@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+import { getTheme } from "../lib/themes.js";
 import "./globals.css";
 
 export const metadata = {
@@ -5,9 +7,11 @@ export const metadata = {
   description: "A considered collection of books for people who build technology.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const theme = getTheme((await cookies()).get("books-theme")?.value);
+
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme={theme}>
       <body>{children}</body>
     </html>
   );

@@ -45,7 +45,7 @@ These settings are read on the server at request time, so they can be changed wh
 
 Compose reads these variables from your shell or a local `.env` file. For example, `ENABLE_AUTH=true RELOAD_SECONDS=0 docker compose up --build` shows the login preview without refreshing it.
 
-The theme chooser currently offers Light. To add another theme, add it to the `themes` list in `app/theme-chooser.js` and define its CSS variables under a matching `data-theme` selector in `app/globals.css`.
+The theme chooser offers Light and Dark. The selection is stored in a cookie so the server renders the chosen theme on reload. To add another theme, add it to the `themes` list in `lib/themes.js` and define its CSS variables under a matching `data-theme` selector in `app/globals.css`.
 
 ## Production image
 

@@ -1,5 +1,7 @@
+import { cookies } from "next/headers";
 import { books } from "../lib/books.js";
 import { getConfig } from "../lib/config.js";
+import { getTheme } from "../lib/themes.js";
 import LoginPreview from "./login-preview.js";
 import ThemeChooser from "./theme-chooser.js";
 
@@ -15,8 +17,9 @@ function Logo() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
   const { enableAuth, reloadSeconds } = getConfig();
+  const theme = getTheme((await cookies()).get("books-theme")?.value);
 
   return (
     <>
@@ -24,7 +27,7 @@ export default function Home() {
       <header className="site-header">
         <div className="header-inner">
           <Logo />
-          <ThemeChooser />
+          {!enableAuth && <ThemeChooser initialTheme={theme} />}
         </div>
       </header>
 
@@ -52,7 +55,7 @@ export default function Home() {
         </section>
       </main>
 
-      {enableAuth && <LoginPreview />}
+      {enableAuth && <LoginPreview initialTheme={theme} />}
     </>
   );
 }
