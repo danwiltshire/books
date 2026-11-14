@@ -19,6 +19,21 @@ npm ci
 npm run dev
 ```
 
+## Tests
+
+With Node.js 20.9 or newer:
+
+```sh
+npm ci
+npm test
+```
+
+Or run the tests using Docker Compose:
+
+```sh
+docker compose run --rm books npm test
+```
+
 ## Configuration
 
 These settings are read on the server at request time, so they can be changed when deploying the same image:
@@ -43,4 +58,30 @@ docker build -t books .
 docker run --rm -p 3000:3000 -e AWS_REGION=us-east-1 books
 ```
 
-The production image runs the Next.js standalone server as a non-root user. Run `npm test` for the configuration and metadata tests.
+The production image runs the Next.js standalone server as a non-root user.
+
+## Kubernetes health probes
+
+`GET /healthz/live` and `GET /healthz/ready` return an uncached `200 OK` when the server can respond, including when the login preview is enabled. Both are lightweight checks; they do not check page rendering, Open Library, or AWS metadata. For example, add these to the container in a Deployment:
+
+```yaml
+ports:
+  - name: http
+    containerPort: 3000
+readinessProbe:
+  httpGet:
+    path: /healthz/ready
+    port: http
+  periodSeconds: 5
+  timeoutSeconds: 2
+  failureThreshold: 3
+livenessProbe:
+  httpGet:
+    path: /healthz/live
+    port: http
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 6
+```
+
+Adjust thresholds for the deployment. If startup is slow, consider a startup probe as well.
