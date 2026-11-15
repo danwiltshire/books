@@ -23,6 +23,9 @@ export default async function Home() {
 
   return (
     <>
+      <div className="announcement">
+        <span aria-hidden="true">📣</span> Dark Mode Available
+      </div>
       <header className="site-header">
         <div className="header-inner">
           <Logo />
