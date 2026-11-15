@@ -3,7 +3,7 @@
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --background: red;
+  --background: #f7f6f1;
   --surface: #eeeee7;
   --ink: #242923;
   --muted: #7d8277;
