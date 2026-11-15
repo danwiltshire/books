@@ -55,6 +55,10 @@ docker run --rm -p 3000:3000 books
 
 The production image runs the Next.js standalone server as a non-root user.
 
+GitHub Actions publishes `sha-<short-commit-sha>` to `426576223955.dkr.ecr.eu-west-2.amazonaws.com/k8s-books` for same-repository pull requests, using the PR head commit. Forked pull requests build without publishing. Pushes to `main` publish both `latest` and the short SHA tag.
+
+Publishing requires the `AWS_ROLE_ARN_ECR_PUBLISH` repository secret and an IAM role with permission to authenticate and push to the ECR repository. Its GitHub OIDC trust policy must allow both the `main` branch and pull request subjects for this repository. Granting the role to pull request workflows permits code from same-repository PRs to use its ECR permissions; restrict repository write access and scope the role accordingly. Dependabot PRs may require separate secret and permission configuration.
+
 ## Kubernetes health probes
 
 `GET /healthz/live` and `GET /healthz/ready` return an uncached `200 OK` when the server can respond, including when the login preview is enabled. Both are lightweight checks; they do not check page rendering or Open Library. For example, add these to the container in a Deployment:
