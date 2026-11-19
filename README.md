@@ -38,8 +38,8 @@ docker compose run --rm books npm test
 
 These settings are read on the server at request time, so they can be changed when deploying the same image:
 
-| Variable | Default | Description |
-| --- | --- | --- |
+| Variable      | Default | Description                                                                                                                 |
+| ------------- | ------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `ENABLE_AUTH` | `false` | Set to `true` to show a **non-functional preview** login form. This does not authenticate users or protect the application. |
 
 Compose reads this variable from your shell or a local `.env` file. For example, `ENABLE_AUTH=true docker compose up --build` shows the login preview.
@@ -54,10 +54,6 @@ docker run --rm -p 3000:3000 books
 ```
 
 The production image runs the Next.js standalone server as a non-root user.
-
-GitHub Actions publishes `sha-<short-commit-sha>` to `426576223955.dkr.ecr.eu-west-2.amazonaws.com/k8s-books` for same-repository pull requests, using the PR head commit. Forked pull requests build without publishing. Pushes to `main` publish both `latest` and the short SHA tag.
-
-Publishing requires the `AWS_ROLE_ARN_ECR_PUBLISH` repository secret and an IAM role with permission to authenticate and push to the ECR repository. Its GitHub OIDC trust policy must allow both the `main` branch and pull request subjects for this repository. Granting the role to pull request workflows permits code from same-repository PRs to use its ECR permissions; restrict repository write access and scope the role accordingly. Dependabot PRs may require separate secret and permission configuration.
 
 ## Kubernetes health probes
 
