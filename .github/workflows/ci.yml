@@ -21,9 +21,9 @@ jobs:
     uses: danwiltshire/github-workflows/.github/workflows/update-gitops-values.yml@main
     if: github.event_name == 'push'
     needs: build
+    secrets: inherit
     with:
       application: ${{ github.event.repository.name }}
       environment: prod
       values: |
-        imageTag="${{ needs.build.outputs.sha-tag }}"
-    secrets: inherit
+        imageTag: "${{ needs.build.outputs.sha-tag }}"
