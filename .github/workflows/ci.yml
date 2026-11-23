@@ -27,5 +27,3 @@ jobs:
       environment: prod
       values: |
         imageTag: "${{ needs.build.outputs.sha-tag }}"
-        celery:
-          imageTag: "${{ needs.build.outputs.sha-tag }}"
